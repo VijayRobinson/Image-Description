@@ -115,4 +115,24 @@ class ParserService():
     def process_objects(self, image_path):
         res = self.get_objects_and_locations(image_path)
         objects = self.create_nodes(res)
-        return self.process_sentence_objects(objects)
+        objects_dict = {}
+        objects_data = []
+        for each in objects:
+            if each.class_name not in objects_dict:
+                objects_dict[each.class_name] = 1
+            else:
+                objects_dict[each.class_name] += 1
+
+        for key, value in objects_dict.items():
+            ndict = {
+                "objectName": key,
+                "objectCount": value
+            }
+            objects_data.append(ndict)
+
+        context = {
+            "data": self.process_sentence_objects(objects),
+            "items": objects_data
+        }
+
+        return context

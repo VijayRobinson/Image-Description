@@ -28,6 +28,7 @@ class CaptionService():
 
     def get_features(self, image_path):
         image = np.asarray(image_path)
+        x = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         x = cv2.resize(image, (224, 224))
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)

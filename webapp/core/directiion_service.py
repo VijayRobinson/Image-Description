@@ -104,3 +104,4 @@ class DirectionService():
         for each in objects:
             if each.class_id == CLASS_NAMES.index(target_class):
                 return self.parse_direction(pos_node, target_node, each),  each
+        return "Unable to find the object...", pos_node
